@@ -1,0 +1,395 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Create account and get cluster · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="exercise-1/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Workshop
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.1.1" data-path="GETSTARTED.html">
+            
+                <a href="GETSTARTED.html">
+            
+                    
+                    Create account and get cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="exercise-1/">
+            
+                <a href="exercise-1/">
+            
+                    
+                    Accessing the cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="exercise-2/README.md">
+            
+                <span>
+            
+                    
+                    Using OpenShift
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4" data-path="exercise-3/README.md">
+            
+                <span>
+            
+                    
+                    Deploy Example Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5" data-path="exercise-4/README.md">
+            
+                <span>
+            
+                    
+                    Metrics and tracing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.6" data-path="exercise-4b/README.md">
+            
+                <span>
+            
+                    
+                    Monitoring (Optional)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.7" data-path="exercise-5/README.md">
+            
+                <span>
+            
+                    
+                    Storage and Networking
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.8" data-path="exercise-6/README.md">
+            
+                <span>
+            
+                    
+                    Advanced Features
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.9" data-path="exercise-7/README.md">
+            
+                <span>
+            
+                    
+                    Runtime Security with Falco
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <a target="_blank" href="https://cognitiveclass.ai/courses/beyond-the-basics-istio-and-ibm-cloud-kubernetes-service/">
+            
+                    
+                    Certification
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Create account and get cluster</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="get-started">Get Started</h1>
+<p>In this section, you will login to your own IBM Cloud account, and then get access to a IBM Cloud Lab account which contains pre-provisioned clusters. Each lab attendee will be granted access to one cluster.</p>
+<ol>
+<li><p>You should already have a federated IBM Cloud account using your company email address, confirm by logging in to <a href="https://cloud.ibm.com" target="_blank">https://cloud.ibm.com</a></p>
+</li>
+<li><p>If you do not have an account, you could create your own <a href="https://ibm.biz/Bdzybn" target="_blank">IBM Cloud account</a>.</p>
+</li>
+<li><p>Go to <a href="http://grant-cluster-iks.mybluemix.net" target="_blank">Grant Cluster</a> web page and enter your IBM ID (the email you used to sign up), the lab key from the instructor, and select the <code>Frankfurt (EU-Central / eu-de)</code> region.</p>
+<p> <img src="README_images/get-clusters.png" alt=""></p>
+</li>
+<li><p>You will be added to the IBM Lab account and granted access to a cluster. Note the name of your cluster. It will be something like: <code>myclusterXXX</code>.</p>
+</li>
+<li><p>Refresh your <a href="https://cloud.ibm.com" target="_blank">IBM Cloud Dashboard</a></p>
+</li>
+<li><p>Switch to the <strong>183569-IBM</strong> account by clicking on the account selection drop down in the top nav bar.</p>
+<p><img src="README_images/ibmaccount.png" alt=""></p>
+</li>
+<li><p>Click on <strong>Kubernetes Clusters</strong> in the Resource Summary tile.</p>
+<p> <img src="README_images/dashboard.png" alt=""></p>
+</li>
+<li><p>Under <strong>Kubernetes Clusters</strong>, click on the cluster that has been assigned to you.</p>
+</li>
+<li><p>Launch the <strong>Kubernetes Dashboard</strong> and have a look around! You can come back to this dashboard throughout your lab.</p>
+</li>
+</ol>
+<h3 id="continue-to-exercise-1"><a href="workshop/exercise-1/README.md">Continue to Exercise 1</a></h3>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Workshop">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="exercise-1/" class="navigation navigation-next " aria-label="Next page: Accessing the cluster">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Create account and get cluster","level":"1.1.1","depth":2,"next":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"path":"exercise-1/README.md","ref":"exercise-1/README.md","articles":[]},"previous":{"title":"Workshop","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[{"title":"Create account and get cluster","level":"1.1.1","depth":2,"path":"GETSTARTED.md","ref":"GETSTARTED.md","articles":[]},{"title":"Accessing the cluster","level":"1.1.2","depth":2,"path":"exercise-1/README.md","ref":"exercise-1/README.md","articles":[]},{"title":"Using OpenShift","level":"1.1.3","depth":2,"path":"exercise-2/README.md","ref":"exercise-2/README.md","articles":[]},{"title":"Deploy Example Application","level":"1.1.4","depth":2,"path":"exercise-3/README.md","ref":"exercise-3/README.md","articles":[]},{"title":"Metrics and tracing","level":"1.1.5","depth":2,"path":"exercise-4/README.md","ref":"exercise-4/README.md","articles":[]},{"title":"Monitoring (Optional)","level":"1.1.6","depth":2,"path":"exercise-4b/README.md","ref":"exercise-4b/README.md","articles":[]},{"title":"Storage and Networking","level":"1.1.7","depth":2,"path":"exercise-5/README.md","ref":"exercise-5/README.md","articles":[]},{"title":"Advanced Features","level":"1.1.8","depth":2,"path":"exercise-6/README.md","ref":"exercise-6/README.md","articles":[]},{"title":"Runtime Security with Falco","level":"1.1.9","depth":2,"path":"exercise-7/README.md","ref":"exercise-7/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"GETSTARTED.md","mtime":"2019-08-03T17:47:05.036Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-03T17:48:03.412Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
