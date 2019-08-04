@@ -288,24 +288,18 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="exercise-2---create-a-sample-nodejs-application">Exercise 2 - Create a Sample Node.js Application</h1>
-<p>In this exercise, you&apos;ll deploy a simple Node.js Express application - &quot;Example Health&quot;. Example health is a simple UI for a patient health records system. We&apos;ll use this example to demonstrate key OpenShift features throughout this workshop.</p>
+<p>In this exercise, you&apos;ll deploy a simple Node.js Express application - &quot;Example Health&quot;. Example health is a simple UI for a patient health records system. We&apos;ll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: <a href="https://github.com/IBM/node-s2i-openshift" target="_blank">https://github.com/IBM/node-s2i-openshift</a></p>
+<h2 id="deploy-example-health">Deploy Example Health</h2>
 <ol>
 <li><p>Open the Web Console</p>
 <p> Connect to the OpenShift web console. You can find the URL in two ways:</p>
-<p> a. Get the Master URL for your cluster from the <code>ibmcloud</code> utility</p>
+<p> a. Get the Master URL for your cluster from the <code>ibmcloud</code> utility and append <code>/console</code> to the URL.</p>
 <pre><code class="lang-shell"> ibmcloud ks cluster get $MYCLUSTER  | grep &apos;Master URL&apos;
 </code></pre>
-<p> b. Access your cluster on the <a href="https://cloud.ibm.com/kubernetes/clusters" target="_blank">IBM Cloud clusters dashboard</a>:</p>
+<p> b. Access your cluster on the <a href="https://cloud.ibm.com/kubernetes/clusters" target="_blank">IBM Cloud clusters dashboard</a>. Click the <code>OpenShift web console</code> button on the top-right.</p>
 </li>
-<li><p>Fork the Sample Application GitHub repository</p>
-<p> The sample application lives here: <a href="https://github.com/IBM/node-s2i-openshift" target="_blank">https://github.com/IBM/node-s2i-openshift</a></p>
-<p> You&apos;ll want your own fork of the GitHub repository so we can make changes to the project. If you don&apos;t already have a GitHub account, make one -- it&apos;s quick and free!</p>
-<p> Navigate to the sample repository click on the Fork button.</p>
-<p> <img src="images/fork.png" alt="fork"></p>
-<p> Select your github user name from the pop-up window.</p>
-</li>
-<li><p>Deploy <em>Example Health</em> from your new repository</p>
-<p> To deploy your just-forked repository, go to the Web Console for your OpenShift cluster and create a project:</p>
+<li><p>Create an OpenShift Project</p>
+<p> Go to the Web Console for your OpenShift cluster and create a project:</p>
 <p> <img src="images/createproject.png" alt="create project"></p>
 <p> Click on your new project. You should see a view that looks like this:</p>
 <p> <img src="images/projectview.png" alt="project"></p>
@@ -315,8 +309,7 @@
 <p> <img src="images/advanced.png" alt="config"></p>
 <p> You&apos;ll see and advanced form like this:</p>
 <p> <img src="images/node-advanced-form.png" alt="form"></p>
-<p> Enter your forked Git Repository URL and <code>/site</code> for the Context Dir. Click &apos;Create&apos; at the bottom of the window to build and deploy the application.</p>
-<p> TODO: Follow the <em>obvious</em> steps on the website pointing you to create a webhook on GitHub.</p>
+<p> Enter the repository: <code>https://github.com/IBM/node-s2i-openshift</code> and <code>/site</code> for the Context Dir. Click &apos;Create&apos; at the bottom of the window to build and deploy the application.</p>
 <p> Scroll through to watch the build deploying:</p>
 <p> <img src="images/build.png" alt="build"></p>
 <p> When the build has deployed, click the External Traffic Route, and you should see the login screen:</p>
@@ -327,7 +320,7 @@
 </ol>
 <h2 id="understanding-what-happened">Understanding What Happened</h2>
 <p>TODO: Explain OpenShift S2I</p>
-<h3 id="continue-to-exercise-3---deploy-a-new-version-of-the-app"><a href="../exercise-3/">Continue to Exercise 3 - Deploy a New Version of the App</a></h3>
+<h3 id="continue-to-exercise-3---scaling-the-app"><a href="../exercise-3/">Continue to Exercise 3 - Scaling the App</a></h3>
 
                                 
                                 </section>
@@ -371,7 +364,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Using OpenShift","level":"1.1.3","depth":2,"next":{"title":"Deploy Example Application","level":"1.1.4","depth":2,"path":"exercise-3/README.md","ref":"exercise-3/README.md","articles":[]},"previous":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"path":"exercise-1/README.md","ref":"exercise-1/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-2/README.md","mtime":"2019-08-04T20:27:20.479Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-04T20:28:17.355Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Using OpenShift","level":"1.1.3","depth":2,"next":{"title":"Deploy Example Application","level":"1.1.4","depth":2,"path":"exercise-3/README.md","ref":"exercise-3/README.md","articles":[]},"previous":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"path":"exercise-1/README.md","ref":"exercise-1/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-2/README.md","mtime":"2019-08-04T20:38:05.154Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-04T20:38:55.452Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
