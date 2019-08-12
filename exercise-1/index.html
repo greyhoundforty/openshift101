@@ -297,36 +297,11 @@
 <li><p>Passcode will be provided by lab instructors.</p>
 </li>
 <li><p>Using the account drop down, choose the <strong>IBM</strong> account.</p>
-<p><img src="../README_images/cloudshell.png" alt=""></p>
-</li>
-<li><p>Click on the Terminal icon to launch your web shell.</p>
 </li>
 </ol>
-<h2 id="access-your-cluster">Access your cluster</h2>
-<p>Learn how to set the context to work with your cluster by using the <code>kubectl</code> CLI, access the Kubernetes dashboard, and gather basic information about your cluster.</p>
+<p>   <img src="images/cloudshell.png" alt=""></p>
 <ol>
-<li><p>Set the context for your cluster in your CLI. Every time you log in to the IBM Cloud Kubernetes Service CLI to work with the cluster, you must run these commands to set the path to the cluster&apos;s configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in IBM Cloud.</p>
-<p>a. List the available clusters. You should see the cluster you were assigned.</p>
-<pre><code class="lang-shell">ibmcloud ks clusters
-</code></pre>
-<p>b. Set an environment variable for your cluster name:</p>
-<pre><code class="lang-shell">export MYCLUSTER=&lt;your_cluster_name&gt;
-</code></pre>
-<p>c. Download the configuration file and certificates for your cluster using the <code>cluster-config</code> command.</p>
-<pre><code class="lang-shell">ibmcloud ks cluster-config $MYCLUSTER
-</code></pre>
-<p>c. <em>Copy and paste the output export command</em> from the output of previous step. This will set the <code>KUBECONFIG</code> environment variable and configure your <code>kubectl</code> CLI to run commands against your cluster. Example:
-<code>export KUBECONFIG=/Users...</code></p>
-</li>
-<li><p>Get basic information about your cluster and its worker nodes. This information can help you manage your cluster and troubleshoot issues.</p>
-<p>a.  View details of your cluster.</p>
-<pre><code class="lang-shell">ibmcloud ks cluster-get $MYCLUSTER
-</code></pre>
-<p>b.  Verify the worker nodes in the cluster.</p>
-<pre><code class="lang-shell">ibmcloud ks workers $MYCLUSTER
-ibmcloud ks worker-get &lt;worker_ID&gt;
-</code></pre>
-</li>
+<li>Click on the Terminal icon to launch your web shell.</li>
 </ol>
 <h2 id="install-openshift-cli-tools">Install OpenShift cli tools</h2>
 <ol>
@@ -353,7 +328,8 @@ which oc
 ```shell
 oc help
 ```
-</code></pre><h2 id="access-the-openshift-web-ui">Access the OpenShift Web UI</h2>
+</code></pre><h1 id="access-your-cluster">Access your cluster</h1>
+<h2 id="access-the-openshift-web-ui">Access the OpenShift Web UI</h2>
 <ol>
 <li>Connect to the OpenShift Web UI where you can manage your hosted OpenShift cluster as well as authenticate your cli tooling.</li>
 </ol>
@@ -363,16 +339,19 @@ oc help
 ibmcloud ks cluster get $MYCLUSTER  | grep &apos;Master URL&apos;
 ```
 
-It will look something like `https://c100-e.us-east.containers.cloud.ibm.com:39813`  
+It will look something like `https://c100-e.us-east.containers.cloud.ibm.com:39813`
 </code></pre><ol>
 <li><p>Construct the console url by appending &apos;/console&apos; to the Master URL.</p>
 <p> a. If your Master URL is <code>https://c100-e.us-east.containers.cloud.ibm.com:39813</code>, then your console URL is <code>https://c100-e.us-east.containers.cloud.ibm.com:39813/console</code>.</p>
 </li>
 <li><p>Connect to the console with a web browser.</p>
 </li>
-<li><p>Select your name/id in the upper right, click. Scroll down to &apos;Copy Login Command&apos; and click it.</p>
-</li>
 </ol>
+<p><img src="images/openshift-console.png" alt=""></p>
+<ol>
+<li>Select your name/id in the upper right, click. Scroll down to &apos;Copy Login Command&apos; and click it.</li>
+</ol>
+<p><img src="images/copy-login.png" alt=""></p>
 <h2 id="access-your-cluster-using-openshift-client-utils">Access your cluster using OpenShift client utils</h2>
 <ol>
 <li>Paste the login command you copied from the Web UI.</li>
@@ -381,18 +360,22 @@ It will look something like `https://c100-e.us-east.containers.cloud.ibm.com:398
 </code></pre>
 <p>You should see a success message.</p>
 <ol>
-<li><p>Validate access to your cluster.</p>
-<p>a.  View nodes in the cluster.</p>
+<li><p>Validate access to your cluster.
+a. Get the current status of your cluster</p>
+<pre><code class="lang-shell">oc status
+</code></pre>
+<p>b.  View nodes in the cluster.</p>
 <pre><code class="lang-shell">oc get node
 </code></pre>
-<p>b.  View services, deployments, and pods.</p>
+<p>c.  View services, deployments, and pods.</p>
 <pre><code class="lang-shell">oc get svc,deploy,po --all-namespaces
 </code></pre>
-<p>c. View all OpenShift projects</p>
+<p>d. View all OpenShift projects</p>
 <pre><code class="lang-shell">oc get projects
 </code></pre>
 </li>
 </ol>
+<h1 id="access-to-the-workshop">Access to the Workshop</h1>
 <h2 id="clone-the-lab-repo">Clone the lab repo</h2>
 <ol>
 <li><p>From your command line, run:</p>
@@ -446,7 +429,7 @@ It will look something like `https://c100-e.us-east.containers.cloud.ibm.com:398
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"next":{"title":"Using OpenShift","level":"1.1.3","depth":2,"path":"exercise-2/README.md","ref":"exercise-2/README.md","articles":[]},"previous":{"title":"Create account and get cluster","level":"1.1.1","depth":2,"path":"GETSTARTED.md","ref":"GETSTARTED.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-1/README.md","mtime":"2019-08-12T17:02:20.063Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-12T17:03:23.003Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"next":{"title":"Using OpenShift","level":"1.1.3","depth":2,"path":"exercise-2/README.md","ref":"exercise-2/README.md","articles":[]},"previous":{"title":"Create account and get cluster","level":"1.1.1","depth":2,"path":"GETSTARTED.md","ref":"GETSTARTED.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-1/README.md","mtime":"2019-08-12T18:20:41.624Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-12T18:21:31.941Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
