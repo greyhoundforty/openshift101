@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Deploy Example Application · GitBook</title>
+        <title>Metrics and tracing · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../exercise-4/" />
+    <link rel="next" href="../exercise-4b/README.md" />
     
     
-    <link rel="prev" href="../exercise-2/" />
+    <link rel="prev" href="../exercise-3/" />
     
 
     </head>
@@ -146,9 +146,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.4" data-path="./">
+        <li class="chapter " data-level="1.1.4" data-path="../exercise-3/">
             
-                <a href="./">
+                <a href="../exercise-3/">
             
                     
                     Deploy Example Application
@@ -159,9 +159,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.5" data-path="../exercise-4/">
+        <li class="chapter active" data-level="1.1.5" data-path="./">
             
-                <a href="../exercise-4/">
+                <a href="./">
             
                     
                     Metrics and tracing
@@ -272,7 +272,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Deploy Example Application</a>
+        <a href=".." >Metrics and tracing</a>
     </h1>
 </div>
 
@@ -287,30 +287,45 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="exercise-3-metrics-and-dashboards">Exercise 3: Metrics and Dashboards</h1>
-<p>In this exercise, we&apos;ll explore the third-party monitoring and metrics dashboards that are installed for free with OpenShift!</p>
-<h2 id="grafana">Grafana</h2>
-<p>Red Hat OpenShift on IBM Cloud comes with <a href="https://grafana.com/" target="_blank">Grafana</a> preinstalled. Get started by switching to the <code>Cluster Console</code> view:</p>
-<p><img src="../.gitbook/assets/clusterconsole.png" alt="Cluster Console"></p>
-<p>Then Navigate to <code>Monitoring &gt; Dashboards</code> in the left-hand bar. You&apos;ll be asked to login with OpenShift and then click through some permissions.</p>
-<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.22.57-pm.png" alt="Monitoring Dashboards"></p>
-<p>You should then see your Grafana dashboard. Hit <code>Home</code> on the top left, and choose <code>K8s / Compute Resources / Namespace</code>.</p>
-<p><img src="../.gitbook/assets/grafana1.png" alt="Grafana"></p>
-<p>Choose the name of the project you created in <a href="exercise-2.md#deploy-example-health">Step 1</a> - the same one that your application is running inside.</p>
-<p>You should be able to see the CPU and Memory usage for your application. In production environments, this is helpful for identifying the average amount of CPU or Memory your application uses, especially as it can fluctuate through the day. We&apos;ll use this information in the next exercise to set up auto-scaling for our pods.</p>
-<p><img src="../.gitbook/assets/grafana2.png" alt="Grafana also project"></p>
-<h2 id="promtheus-and-alert-manager">Promtheus and Alert Manager</h2>
-<p>Navigating back to the cluster console, you can also launch:</p>
-<ul>
-<li><strong><a href="https://prometheus.io/" target="_blank">Prometheus</a></strong> - a monitoring system with an efficient time series database</li>
-<li><strong><a href="https://prometheus.io/docs/alerting/alertmanager/" target="_blank">Alertmanager</a></strong> - an extension of Prometheus focused on managing alerts</li>
-</ul>
-<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.22.57-pm.png" alt="Metrics, Alerts and Dashboards"></p>
-<h2 id="prometheus">Prometheus</h2>
-<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.22.08-pm.png" alt="Prometheus"></p>
-<h2 id="alertmanager">Alertmanager</h2>
-<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.22.23-pm.png" alt="Alert Manager"></p>
-<h2 id="continue-to-exercise-4"><a href="exercise-4/README.md">Continue to Exercise 4</a></h2>
+                                <h1 id="exercise-4-autoscale-pods">Exercise 4: Autoscale Pods</h1>
+<p>In this exercise, we&apos;ll leverage the metrics we&apos;ve observed in the previous step to automatically scale our UI application in response to load.</p>
+<h2 id="enable-resource-limits">Enable Resource Limits</h2>
+<p>Before we can setup autoscaling for our pods, we first need to set resource limits on the pods running in our cluster. Limits allows you to choose the minimum and maximum CPU and memory usage for a pod.</p>
+<p>Navigate to <code>Applications &gt; Deployments</code>, then choose your deployment. Then, choose <code>Actions &gt; Edit Resource Limits</code>.</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-9.54.54-pm.png" alt="Add Resource Limits"></p>
+<p>Hopefully you have your running script simulating load (if not go <a href="../exercise-2/#simulate-load-on-the-application">here</a>),
+Grafana showed you that your application was consuming anywhere between &quot;.002&quot; to
+&quot;.02&quot; cores. This translates to 2-20 &quot;millicores&quot;. That seems like a good range for
+our CPU request, but to be safe, let&apos;s bump the higher-end up to 30 millicores. In
+addition, Grafana showed that the app consumes about <code>25</code>-<code>35</code> MB of RAM. Set the
+following resource limits for your deployment now.</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-10.02.34-pm.png" alt="Recommended Resource Limits"></p>
+<p><div class="alert alert-info hints-alert"><div class="hints-icon"><i class="fa fa-info-circle"></i></div><div class="hints-container"><p>Remember to set the correct unit -- millicores and MB (not MiB)</p>
+</div></div></p>
+<p>Hit save. If there&apos;s an error saying that the deployment has changed, you may need to go back to your deployment, refersh the page, and try again.</p>
+<h2 id="enable-autoscaler">Enable Autoscaler</h2>
+<p>Now that we have resource limits, let&apos;s enable autoscaler. Go back to the deployment, but this time choose <code>Actions &gt; Edit Autoscaler</code>.</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-10.04.43-pm%20%281%29.png" alt="Edit Autoscaler"></p>
+<p>By default, the autoscaler allows you to scale based on CPU or Memory. The UI allows
+you to do CPU only (for now). Pods are balanced between the minimum and maximum
+number of pods that you specify. With the autoscaler, pods are automatically created
+or deleted to ensure that the average CPU usage of the pods is below the CPU request
+target as defined. In general, you probably want to start scaling up when you get near
+<code>50</code>-<code>90</code>% of the CPU usage of a pod. In our case, let&apos;s make it <code>1</code>% to test the autoscaler
+since we are generating minimal load.</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-10.09.25-pm.png" alt="Autoscaler Recommended Values"></p>
+<p>Click <code>Save</code>.</p>
+<h2 id="test-autoscaler">Test Autoscaler</h2>
+<p>If you&apos;re not running the script from the <a href="exercise-2.md#simulate-load-on-the-application">previous exercise</a>, the pods should stay at 1. Check by going to the overview page.</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-10.10.39-pm.png" alt="Scaled to 1 pod"></p>
+<p>Start simulating load by hitting the page several times, or running the script. You&apos;ll see that it starts to scale up:</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-10.11.33-pm.png" alt="Scaled to 4/10 pods"></p>
+<p>That&apos;s it! You now have a highly available and automatically scaled front-end Node.js application. OpenShift is automatically scaling your application pods since the CPU usage of the pods greatly exceeded <code>1</code>% of the resource limit, <code>30</code> millicores.</p>
+<h3 id="optional">Optional</h3>
+<p>Find the Autoscaler information in the Deployment.</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-10.16.59-pm.png" alt="Autoscaler Deployment"></p>
+<p>If you&apos;re interested in setting up the CLI, <a href="exercise-1.md">follow the steps here</a>. Then, run the following command in your CLI <code>oc get hpa</code> to get information about your horizontal pod autoscaler. Remember to switch to your project first with <code>oc project &lt;project-name&gt;</code>.</p>
+<h2 id="continue-to-exercise-5"><a href="exercise-5/README.md">Continue to Exercise 5</a></h2>
 
                                 
                                 </section>
@@ -338,12 +353,12 @@
 
             
                 
-                <a href="../exercise-2/" class="navigation navigation-prev " aria-label="Previous page: Using OpenShift">
+                <a href="../exercise-3/" class="navigation navigation-prev " aria-label="Previous page: Deploy Example Application">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../exercise-4/" class="navigation navigation-next " aria-label="Next page: Metrics and tracing">
+                <a href="../exercise-4b/README.md" class="navigation navigation-next " aria-label="Next page: Monitoring (Optional)">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -354,7 +369,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Deploy Example Application","level":"1.1.4","depth":2,"next":{"title":"Metrics and tracing","level":"1.1.5","depth":2,"path":"exercise-4/README.md","ref":"exercise-4/README.md","articles":[]},"previous":{"title":"Using OpenShift","level":"1.1.3","depth":2,"path":"exercise-2/README.md","ref":"exercise-2/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-3/README.md","mtime":"2019-08-23T14:23:44.132Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-23T14:24:33.966Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Metrics and tracing","level":"1.1.5","depth":2,"next":{"title":"Monitoring (Optional)","level":"1.1.6","depth":2,"path":"exercise-4b/README.md","ref":"exercise-4b/README.md","articles":[]},"previous":{"title":"Deploy Example Application","level":"1.1.4","depth":2,"path":"exercise-3/README.md","ref":"exercise-3/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-4/README.md","mtime":"2019-08-23T14:23:44.132Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-23T14:24:33.966Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

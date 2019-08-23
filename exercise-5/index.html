@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Deploy Example Application · GitBook</title>
+        <title>Storage and Networking · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../exercise-4/" />
+    <link rel="next" href="../exercise-6/" />
     
     
-    <link rel="prev" href="../exercise-2/" />
+    <link rel="prev" href="../exercise-4b/README.md" />
     
 
     </head>
@@ -146,9 +146,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.4" data-path="./">
+        <li class="chapter " data-level="1.1.4" data-path="../exercise-3/">
             
-                <a href="./">
+                <a href="../exercise-3/">
             
                     
                     Deploy Example Application
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.7" data-path="../exercise-5/">
+        <li class="chapter active" data-level="1.1.7" data-path="./">
             
-                <a href="../exercise-5/">
+                <a href="./">
             
                     
                     Storage and Networking
@@ -272,7 +272,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Deploy Example Application</a>
+        <a href=".." >Storage and Networking</a>
     </h1>
 </div>
 
@@ -287,30 +287,34 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="exercise-3-metrics-and-dashboards">Exercise 3: Metrics and Dashboards</h1>
-<p>In this exercise, we&apos;ll explore the third-party monitoring and metrics dashboards that are installed for free with OpenShift!</p>
-<h2 id="grafana">Grafana</h2>
-<p>Red Hat OpenShift on IBM Cloud comes with <a href="https://grafana.com/" target="_blank">Grafana</a> preinstalled. Get started by switching to the <code>Cluster Console</code> view:</p>
-<p><img src="../.gitbook/assets/clusterconsole.png" alt="Cluster Console"></p>
-<p>Then Navigate to <code>Monitoring &gt; Dashboards</code> in the left-hand bar. You&apos;ll be asked to login with OpenShift and then click through some permissions.</p>
-<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.22.57-pm.png" alt="Monitoring Dashboards"></p>
-<p>You should then see your Grafana dashboard. Hit <code>Home</code> on the top left, and choose <code>K8s / Compute Resources / Namespace</code>.</p>
-<p><img src="../.gitbook/assets/grafana1.png" alt="Grafana"></p>
-<p>Choose the name of the project you created in <a href="exercise-2.md#deploy-example-health">Step 1</a> - the same one that your application is running inside.</p>
-<p>You should be able to see the CPU and Memory usage for your application. In production environments, this is helpful for identifying the average amount of CPU or Memory your application uses, especially as it can fluctuate through the day. We&apos;ll use this information in the next exercise to set up auto-scaling for our pods.</p>
-<p><img src="../.gitbook/assets/grafana2.png" alt="Grafana also project"></p>
-<h2 id="promtheus-and-alert-manager">Promtheus and Alert Manager</h2>
-<p>Navigating back to the cluster console, you can also launch:</p>
-<ul>
-<li><strong><a href="https://prometheus.io/" target="_blank">Prometheus</a></strong> - a monitoring system with an efficient time series database</li>
-<li><strong><a href="https://prometheus.io/docs/alerting/alertmanager/" target="_blank">Alertmanager</a></strong> - an extension of Prometheus focused on managing alerts</li>
-</ul>
-<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.22.57-pm.png" alt="Metrics, Alerts and Dashboards"></p>
-<h2 id="prometheus">Prometheus</h2>
-<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.22.08-pm.png" alt="Prometheus"></p>
-<h2 id="alertmanager">Alertmanager</h2>
-<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.22.23-pm.png" alt="Alert Manager"></p>
-<h2 id="continue-to-exercise-4"><a href="exercise-4/README.md">Continue to Exercise 4</a></h2>
+                                <h1 id="exercise-5-liveness-and-readiness-probes">Exercise 5: Liveness and Readiness Probes</h1>
+<p>In Kubernetes, liveness and readiness probes are essential for smoothly running applications.
+A probe is generally a REST <code>GET</code> call, but there are other types of probes available.
+Liveness probes are used to determine when to restart a container. For example, an
+application that is unhealthy and no longer responding to an API call would be
+restarted by OpenShift. Readiness probes determine when a container is ready to
+start receiving traffic. If a readiness probe fails, then the load balancer
+would deregister that service.</p>
+<h2 id="create-readiness-and-liveness-probes">Create Readiness and Liveness Probes</h2>
+<p>The <code>/info</code> endpoint on the Example Health application is a great way to check
+whether the application is running and responding to API calls -- it responds
+with a simple JSON payload.</p>
+<p>Navigate to your deployment and choose <code>Actions &gt; Edit Health Checks</code>.</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.05.38-pm.png" alt="Health Checks"></p>
+<p>Add a readiness probe:</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.06.13-pm.png" alt="Readiness"></p>
+<p>Add a liveness probe:</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.16.22-pm.png" alt="Liveness"></p>
+<p>Click Save.</p>
+<p>If all works, everything should be the same. Let&apos;s check that the probes are really working though.</p>
+<h2 id="inject-failure">Inject Failure</h2>
+<p>Let&apos;s edit the probe with a typo to see what happens when it fails. Edit the health check and change the path for the readiness probe to <code>/badpath</code>. Wait a few minutes and check your deployment - you&apos;ll notice that <code>0/1</code> containers are ready:</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.12.52-pm.png" alt="Badpath"></p>
+<p>Dive into your events and you&apos;ll see that the probe is failing, causing the platform to try and repeatedly restart your pod.</p>
+<p><img src="../.gitbook/assets/screen-shot-2019-08-13-at-11.13.02-pm.png" alt="Deeper Dive"></p>
+<p>Using health checks gives your OpenShift service layer better reliability and helps you start with a strong foundation.</p>
+<h2 id="youre-done">You&apos;re done</h2>
+<p>Congratulations on completing the lab!</p>
 
                                 
                                 </section>
@@ -338,12 +342,12 @@
 
             
                 
-                <a href="../exercise-2/" class="navigation navigation-prev " aria-label="Previous page: Using OpenShift">
+                <a href="../exercise-4b/README.md" class="navigation navigation-prev " aria-label="Previous page: Monitoring (Optional)">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../exercise-4/" class="navigation navigation-next " aria-label="Next page: Metrics and tracing">
+                <a href="../exercise-6/" class="navigation navigation-next " aria-label="Next page: Advanced Features">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -354,7 +358,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Deploy Example Application","level":"1.1.4","depth":2,"next":{"title":"Metrics and tracing","level":"1.1.5","depth":2,"path":"exercise-4/README.md","ref":"exercise-4/README.md","articles":[]},"previous":{"title":"Using OpenShift","level":"1.1.3","depth":2,"path":"exercise-2/README.md","ref":"exercise-2/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-3/README.md","mtime":"2019-08-23T14:23:44.132Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-23T14:24:33.966Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Storage and Networking","level":"1.1.7","depth":2,"next":{"title":"Advanced Features","level":"1.1.8","depth":2,"path":"exercise-6/README.md","ref":"exercise-6/README.md","articles":[]},"previous":{"title":"Monitoring (Optional)","level":"1.1.6","depth":2,"path":"exercise-4b/README.md","ref":"exercise-4b/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-5/README.md","mtime":"2019-08-23T14:23:44.132Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-23T14:24:33.966Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

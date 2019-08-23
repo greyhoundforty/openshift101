@@ -159,9 +159,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.5" data-path="../exercise-4/README.md">
+        <li class="chapter " data-level="1.1.5" data-path="../exercise-4/">
             
-                <span>
+                <a href="../exercise-4/">
             
                     
                     Metrics and tracing
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.7" data-path="../exercise-5/README.md">
+        <li class="chapter " data-level="1.1.7" data-path="../exercise-5/">
             
-                <span>
+                <a href="../exercise-5/">
             
                     
                     Storage and Networking
@@ -198,9 +198,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.8" data-path="../exercise-6/README.md">
+        <li class="chapter " data-level="1.1.8" data-path="../exercise-6/">
             
-                <span>
+                <a href="../exercise-6/">
             
                     
                     Advanced Features
@@ -287,40 +287,35 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="exercise-2---create-a-sample-nodejs-application">Exercise 2 - Create a Sample Node.js Application</h1>
-<p>In this exercise, you&apos;ll deploy a simple Node.js Express application - &quot;Example Health&quot;. Example health is a simple UI for a patient health records system. We&apos;ll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: <a href="https://github.com/IBM/node-s2i-openshift" target="_blank">https://github.com/IBM/node-s2i-openshift</a></p>
-<h2 id="deploy-example-health">Deploy Example Health</h2>
-<ol>
-<li><p>Open the Web Console</p>
-<p> Connect to the OpenShift web console. You can find the URL in two ways:</p>
-<p> a. Get the Master URL for your cluster from the <code>ibmcloud</code> utility and append <code>/console</code> to the URL.</p>
-<pre><code class="lang-shell"> ibmcloud ks cluster get $MYCLUSTER  | grep &apos;Master URL&apos;
+                                <h1 id="exercise-2-logging-and-monitoring">Exercise 2: Logging and Monitoring</h1>
+<p>In this exercise, we&apos;ll explore the out-of-the-box logging and monitoring capabilities that are offered in OpenShift.</p>
+<h2 id="simulate-load-on-the-application">Simulate Load on the Application</h2>
+<p>First, let&apos;s simulate some load on our application. Run the following script which will endlessly spam our app with requests:</p>
+<pre><code class="lang-bash"><span class="hljs-keyword">while</span> sleep 1; <span class="hljs-keyword">do</span> curl <span class="hljs-_">-s</span> &lt;your_app_route&gt;/info; <span class="hljs-keyword">done</span>
 </code></pre>
-<p> b. Access your cluster on the <a href="https://cloud.ibm.com/kubernetes/clusters" target="_blank">IBM Cloud clusters dashboard</a>. Click the <code>OpenShift web console</code> button on the top-right.</p>
-</li>
-<li><p>Create an OpenShift Project</p>
-<p> Go to the Web Console for your OpenShift cluster and create a project:</p>
-<p> <img src="images/createproject.png" alt="create project"></p>
-<p> Click on your new project. You should see a view that looks like this:</p>
-<p> <img src="images/projectview.png" alt="project"></p>
-<p> Click on the browse catalog button to see the images available to build with and scroll down to the Node image. Click on the &apos;Node.js&apos; icon.</p>
-<p> <img src="images/node.png" alt="node"></p>
-<p> Click through to the second step for configuration, and choose advanced options ( a hyperlink on the bottom line )</p>
-<p> <img src="images/advanced.png" alt="config"></p>
-<p> You&apos;ll see and advanced form like this:</p>
-<p> <img src="images/node-advanced-form.png" alt="form"></p>
-<p> Enter the repository: <code>https://github.com/IBM/node-s2i-openshift</code> and <code>/site</code> for the Context Dir. Click &apos;Create&apos; at the bottom of the window to build and deploy the application.</p>
-<p> Scroll through to watch the build deploying:</p>
-<p> <img src="images/build.png" alt="build"></p>
-<p> When the build has deployed, click the External Traffic Route, and you should see the login screen:</p>
-<p> <img src="images/login.png" alt="login"></p>
-<p> You can enter any strings for username and password, for instance test/test ... because the app is just running in demo mode.</p>
-<p> And you&apos;ve deployed a node app to kubernetes using OpenShift S2I.</p>
-</li>
-</ol>
-<h2 id="understanding-what-happened">Understanding What Happened</h2>
-<p>TODO: Explain OpenShift S2I</p>
-<h3 id="continue-to-exercise-3---scaling-the-app"><a href="../exercise-3/">Continue to Exercise 3 - Scaling the App</a></h3>
+<p><div class="alert alert-info hints-alert"><div class="hints-icon"><i class="fa fa-info-circle"></i></div><div class="hints-container"><p>Note: Retrieve the external URL from the OpenShift console, or from the URL of your Example Health application. Note that there may be an <code>/index.html</code> at the end that you need to replace with <code>/info</code>. We&apos;re hitting the /info endpoint which will trigger some logs from our app. For example:</p>
+<p><a href="http://patientui-health-example.myopenshift-341665-66631af3eb2bd8030c5bb56d415b8851-0001.us-east.containers.appdomain.cloud/jee.html" target="_blank"><code>http://patientui-health-example.myopenshift-xxx.us-east.containers.appdomain.cloud/info</code></a></p>
+</div></div></p>
+<h2 id="openshift-logging">OpenShift Logging</h2>
+<p>Since we only created one pod, seeing our logs will be straight forward. Navigate to <code>Applications &gt; Pods</code> menu on the left on the console. You&apos;ll see two pods here, one for the build (that&apos;s already :heavy_check_mark: Completed), and one for the pod that is running your application.</p>
+<p><img src="../.gitbook/assets/pods.png" alt="Pods"></p>
+<p>Click into the <code>Running</code> pod and navigate to the <code>Logs</code> tab. You should see the Node.js application start-up logs, as well as periodic logs from your curl loop.</p>
+<p><img src="../.gitbook/assets/logs.png" alt="Logs"></p>
+<h2 id="openshift-terminal">OpenShift Terminal</h2>
+<p>One of the great things about Kuberentes is the ability to quickly debug your application pods with SSH terminals. This is great for development, but generally is not recommended in production environments. OpenShift makes it even easier by allowing you to launch a terminal directly in the dashboard.</p>
+<p>Switch to the <code>Terminal</code> tab, and run the following commands.</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># This command shows you the the project files.</span>
+$ ls
+<span class="hljs-comment"># This command shows you the running processes.</span>
+$ ps aux
+</code></pre>
+<p><img src="../.gitbook/assets/terminal.png" alt="Terminal"></p>
+<h2 id="openshift-monitoring">OpenShift Monitoring</h2>
+<p>When deploying new apps, making configuration changes, or simply inspecting the state of your cluster, the OpenShift monitoring dashboard gives you an overview of your running assets. Access the Dashboard now by going to the <code>Monitoring</code> tab on the left side menu.</p>
+<p>You can also dive in a bit deeper - the <code>Events</code> view is very useful for identifying the timeline of events and finding potential error messages. Hit the &apos;View Details&apos; button on the top right.</p>
+<p><img src="../.gitbook/assets/viewdetails.png" alt="View Details"></p>
+<p>You&apos;ll want to refer to this view throughout the lab. Almost all actions we take in in OpenShift will result in an event being fired in this view. As it is updated real-time, it&apos;s a great way to track changes to state.</p>
+<h2 id="continue-to-exercise-3"><a href="exercise-3/README.md">Continue to Exercise 3</a></h2>
 
                                 
                                 </section>
@@ -364,7 +359,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Using OpenShift","level":"1.1.3","depth":2,"next":{"title":"Deploy Example Application","level":"1.1.4","depth":2,"path":"exercise-3/README.md","ref":"exercise-3/README.md","articles":[]},"previous":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"path":"exercise-1/README.md","ref":"exercise-1/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-2/README.md","mtime":"2019-08-14T21:24:02.060Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-14T21:24:55.213Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Using OpenShift","level":"1.1.3","depth":2,"next":{"title":"Deploy Example Application","level":"1.1.4","depth":2,"path":"exercise-3/README.md","ref":"exercise-3/README.md","articles":[]},"previous":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"path":"exercise-1/README.md","ref":"exercise-1/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-2/README.md","mtime":"2019-08-23T14:23:44.132Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-23T14:24:33.966Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

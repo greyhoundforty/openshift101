@@ -159,9 +159,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.5" data-path="../exercise-4/README.md">
+        <li class="chapter " data-level="1.1.5" data-path="../exercise-4/">
             
-                <span>
+                <a href="../exercise-4/">
             
                     
                     Metrics and tracing
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.7" data-path="../exercise-5/README.md">
+        <li class="chapter " data-level="1.1.7" data-path="../exercise-5/">
             
-                <span>
+                <a href="../exercise-5/">
             
                     
                     Storage and Networking
@@ -198,9 +198,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.8" data-path="../exercise-6/README.md">
+        <li class="chapter " data-level="1.1.8" data-path="../exercise-6/">
             
-                <span>
+                <a href="../exercise-6/">
             
                     
                     Advanced Features
@@ -287,108 +287,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="exercise-1---accessing-your-kubernetes-cluster">Exercise 1 - Accessing your Kubernetes Cluster</h1>
-<p>You must already have an IBM Cloud account, with a cluster created or assigned to you as documented in <a href="../GETSTARTED.html">previous step</a>.</p>
-<h2 id="connect-to-your-cluster-using-the-lab-web-shell-cloud-shell">Connect to your cluster using the lab web shell (Cloud Shell)</h2>
-<p>For this lab, a web shell is provided for you with all the necessary tools. Use this web shell to perform the tasks in this lab.</p>
-<ol>
-<li><p>Using Chrome or Firefox, go to the <a href="cloudshell-url">Cloud Shell</a> and login using the Login button.</p>
-</li>
-<li><p>Passcode will be provided by lab instructors.</p>
-</li>
-<li><p>Using the account drop down, choose the <strong>IBM</strong> account.</p>
-</li>
-<li><p>Click on the Terminal icon to launch your web shell.</p>
-<p><img src="README_images/cloudshell.png" alt="Cloud Shell"></p>
-</li>
-</ol>
-<h2 id="inspect-your-cluster-on-the-command-line">Inspect your cluster on the command line</h2>
-<ol>
-<li><p>List the available clusters.</p>
-<pre><code class="lang-shell"> ibmcloud ks clusters
-</code></pre>
-<blockquote>
-<p>Note: If no clusters are shown, make sure you are targeting the IBM account in the top right corner.</p>
-</blockquote>
-</li>
-<li><p>For convenience, export your cluster name as an environment variable.  </p>
-<pre><code class="lang-shell"> export MYCLUSTER=&lt;your_cluster_name&gt;
-</code></pre>
-</li>
-</ol>
-<h2 id="install-openshift-cli-tools">Install OpenShift cli tools</h2>
-<ol>
-<li><p>Download and unpack OpenShift cli tools. The <code>oc</code> utility is your main gateway into OpenShift. We&apos;ll add them to your path in a convenient location.</p>
-<p> a. Download tarball of the tools</p>
-<pre><code class="lang-shell"> wget https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz
-</code></pre>
-<p> b. Unpack</p>
-<pre><code class="lang-shell"> tar -xvzf openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz
-</code></pre>
-<p> c. Rename for ease of use</p>
-<pre><code class="lang-shell"> mv openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit ${HOME}/oc-cli
-</code></pre>
-<p> d. Set Path. Note that if you restart your cloud shell, you may need to re-run this command.</p>
-<pre><code class="lang-shell"> export PATH=${PATH}:${HOME}/oc-cli
-</code></pre>
-<p> e. Verify the utility is available by using <code>which</code> and the help</p>
-<pre><code class="lang-shell"> which oc
-</code></pre>
-<pre><code class="lang-shell"> oc help
-</code></pre>
-</li>
-</ol>
-<h2 id="access-the-openshift-web-ui">Access the OpenShift Web UI</h2>
-<ol>
-<li><p>Connect to the OpenShift Web UI where you can manage your hosted OpenShift cluster as well as authenticate your cli tooling.</p>
-<p> a. Get the Master URL for your cluster from the <code>ibmcloud</code> utility</p>
-<pre><code class="lang-shell"> ibmcloud ks cluster get $MYCLUSTER  | grep &apos;Master URL&apos;
-</code></pre>
-<p> It will look something like <code>https://c100-e.us-east.containers.cloud.ibm.com:39813</code></p>
-</li>
-<li><p>Construct the console url by appending &apos;/console&apos; to the Master URL.</p>
-<p> a. If your Master URL is <code>https://c100-e.us-east.containers.cloud.ibm.com:39813</code>, then your console URL is <code>https://c100-e.us-east.containers.cloud.ibm.com:39813/console</code>.</p>
-</li>
-<li><p>Connect to the console with a web browser.</p>
-<p> <img src="images/openshift-console.png" alt="The OpenShift Web UI"></p>
-</li>
-<li><p>Select your name/id in the upper right, click. Scroll down to &apos;Copy Login Command&apos; and click it.</p>
-<p> <img src="images/copy-login.png" alt="The login command"></p>
-</li>
-</ol>
-<h2 id="access-your-cluster-using-openshift-client-utils">Access your cluster using OpenShift client utils</h2>
-<ol>
-<li><p>Paste the login command you copied from the Web UI.</p>
-<pre><code class="lang-shell"> oc login https://c100-e.us-east.containers.cloud.ibm.com:39813 --token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-</code></pre>
-<p> You should see a success message.</p>
-</li>
-<li><p>Validate access to your cluster.
- a. Get the current status of your cluster</p>
-<pre><code class="lang-shell"> oc status
-</code></pre>
-<p> b.  View nodes in the cluster.</p>
-<pre><code class="lang-shell"> oc get node
-</code></pre>
-<p> c.  View services, deployments, and pods.</p>
-<pre><code class="lang-shell"> oc get svc,deploy,po --all-namespaces
-</code></pre>
-<p> d. View all OpenShift projects</p>
-<pre><code class="lang-shell"> oc get projects
-</code></pre>
-</li>
-</ol>
-<h2 id="clone-the-lab-repo">Clone the lab repo</h2>
-<ol>
-<li><p>From your command line, run:</p>
-<pre><code class="lang-shell"> git clone https://github.com/IBM/openshift101
- cd openshift101/workshop
-</code></pre>
-<p> This is the working directory for the workshop. You will use the <code>.yaml</code> files that are located in the <code>workshop/plans</code> directory in the following exercises.</p>
-</li>
-</ol>
-<h3 id="continue-to-exercise-2---create-a-sample-nodejs-application"><a href="../exercise-2/">Continue to Exercise 2 - Create a Sample Node.js Application</a></h3>
-<!-- put the vcpi URL here -->
+                                <h1 id="exercise-1-using-openshift">Exercise 1: Using OpenShift</h1>
+<p>In this exercise, you&apos;ll deploy a simple Node.js Express application - &quot;Example Health&quot;. Example Health is a simple UI for a patient health records system. We&apos;ll use this example to demonstrate key OpenShift features throughout this workshop. You can find the sample application GitHub repository here: <a href="https://github.com/IBM/node-s2i-openshift" target="_blank">https://github.com/IBM/node-s2i-openshift</a></p>
+<h2 id="deploy-example-health">Deploy Example Health</h2>
+<!-- Mofi: Put a screen shot here showing off the Dashboard per the cluster -->
+<p>Access your cluster on the <a href="https://cloud.ibm.com/kubernetes/clusters" target="_blank">IBM Cloud clusters dashboard</a>. Click the <code>OpenShift web console</code> button on the top-right. (This is a pop-up so you&apos;ll need to white list this site.)</p>
+<p>Create a project, you can title it whatever you like, we suggest &quot;example-health.&quot;</p>
+<p><img src="../.gitbook/assets/createproject.png" alt="Create Project"></p>
+<p>Click on your new project. You should see a view that looks like this:</p>
+<p><img src="../.gitbook/assets/projectview.png" alt="Project View"></p>
+<p>Click on the browse catalog button and scroll down to the <code>Node.js</code> image. Click on that catalog button.</p>
+<p><img src="../.gitbook/assets/node.png" alt="Node"></p>
+<p>Click through to the second step for configuration, and choose <code>advanced options</code>. ( a blue hyperlink on the bottom line )</p>
+<!-- Mofi: to add a box around the image -->
+<p><img src="../.gitbook/assets/advanced.png" alt="Advanced"></p>
+<p>You&apos;ll see an advanced form like this:</p>
+<p><img src="../.gitbook/assets/node-advanced-form.png" alt="Node Advanced Form"></p>
+<p>Enter the repository: <code>https://github.com/IBM/node-s2i-openshift</code> and <code>/site</code> for the &apos;Context Dir&apos;. Click &apos;Create&apos; at the bottom of the window to build and deploy the application.</p>
+<p>Scroll through to watch the build deploying:</p>
+<p><img src="../.gitbook/assets/build.png" alt="Build"></p>
+<p>When the build has deployed, click the &apos;External Traffic Route&apos;, and you should see the login screen like the following:</p>
+<p><img src="../.gitbook/assets/login.png" alt="Login"></p>
+<p>You can enter any strings for username and password, for instance <code>test:test</code> because the app is running in demo mode.</p>
+<p>Congrats! You&apos;ve deployed a <code>Node.js</code> app to Kubernetes using OpenShift Source-to-Image (S2I).</p>
+<h2 id="understanding-what-happened">Understanding What Happened</h2>
+<p><a href="https://docs.openshift.com/container-platform/3.6/architecture/core_concepts/builds_and_image_streams.html#source-build" target="_blank">S2I</a> is a framework that creates container images from source code, then runs the assembled images as a containers. It allows developers to build reproducible images easily, letting them spend time on what matters most, developing their code!</p>
+<h2 id="continue-to-exercise-2"><a href="exercise-2/README.md">Continue to Exercise 2</a></h2>
 
                                 
                                 </section>
@@ -432,7 +356,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"next":{"title":"Using OpenShift","level":"1.1.3","depth":2,"path":"exercise-2/README.md","ref":"exercise-2/README.md","articles":[]},"previous":{"title":"Create account and get cluster","level":"1.1.1","depth":2,"path":"GETSTARTED.md","ref":"GETSTARTED.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-1/README.md","mtime":"2019-08-14T21:24:02.056Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-14T21:24:55.213Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Accessing the cluster","level":"1.1.2","depth":2,"next":{"title":"Using OpenShift","level":"1.1.3","depth":2,"path":"exercise-2/README.md","ref":"exercise-2/README.md","articles":[]},"previous":{"title":"Create account and get cluster","level":"1.1.1","depth":2,"path":"GETSTARTED.md","ref":"GETSTARTED.md","articles":[]},"dir":"ltr"},"config":{"plugins":["hints"],"root":"./workshop","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"exercise-1/README.md","mtime":"2019-08-23T14:23:44.132Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-23T14:24:33.966Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
