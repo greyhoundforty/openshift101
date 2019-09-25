@@ -136,13 +136,13 @@ CMD [ "node", "app.js" ]
 
 * Run the app with Docker,
 
-  ```console
-  $ docker stop example-health
-  $ docker rm example-health
-  $ docker build --no-cache -t example-health .
-  $ docker run -d --restart always --name example-health -p 3000:3000 example-health
-  da106f3b5a06a00ea8bf56c54e29f6e38405a77c6dec3e461e3062aa823d8a4f
-  ```
+```console
+$ docker stop example-health
+$ docker rm example-health
+$ docker build --no-cache -t example-health .
+$ docker run -d --restart always --name example-health -p 3000:3000 example-health
+da106f3b5a06a00ea8bf56c54e29f6e38405a77c6dec3e461e3062aa823d8a4f
+```
 
 3. Build and Push the Image to your public Docker Hub Registry.
 
@@ -176,7 +176,7 @@ e9dc98463cd6: Mounted from <username>/example-health
 1.0.0: digest: sha256:a329778ce422e3d25ac9ff70b5131a9de26184a1e94b6d08844ea4f361519fd7 size: 2205
 ```
 
-1. Login to the Remote OpenShift Cluster
+### Login to the Remote OpenShift Cluster
 
 	* Login to the OpenShift cluster web console,
 	* From the logged in user drop down in the top right of the web console, select `Copy Login Command`,
@@ -187,9 +187,7 @@ e9dc98463cd6: Mounted from <username>/example-health
 $ oc login https://c100-e.us-south.containers.cloud.ibm.com:30403 --token=jWX7a04tRgpdhW_iofWuHqb_Ygp8fFsUkRjOK7_QyFQ
 ```
 
-4. Create a new Project
-
-	* Create a new project `example-health-ns`,
+1. Create a new project `example-health-ns`
 
 ```console
 $ oc new-project example-health-ns
@@ -202,7 +200,7 @@ You can add applications to this project with the 'new-app' command. For example
 to build a new example application in Ruby.
 ```
 
-	* Use the `example-health-ns` project,
+* Use the `example-health-ns` project,
 
 ```console
 $ oc project example-health-ns
@@ -211,9 +209,9 @@ $ oc project
 Using project "example-health-ns" on server "https://c100-e.us-south.containers.cloud.ibm.com:30403".
 ```
 
-5. Deploy the `Example Health` app using the Docker image,
+2. Deploy the `Example Health` app using the Docker image,
 
-	* Create the application, and replace <username> by the username of your Docker Hub account,
+* Create the application, and replace <username> by the username of your Docker Hub account,
 
 ```console
 $ oc new-app <username>/example-health:latest --name=example-health-cli
@@ -237,7 +235,7 @@ $ oc new-app <username>/example-health:latest --name=example-health-cli
 
 * This will create an ImageStream, Deployment, a Pod, and a Service resource for the `Example-Health` app,
 
-6. Expose the `Example-Health` service,
+3. Expose the `Example-Health` service,
 
 	* The last thing to do is to create a route. By default, services on OpenShift are not publically available. A route will expose the service publically to external traffic.
 
@@ -246,7 +244,7 @@ $ oc expose svc/example-health-cli
 route.route.openshift.io/example-health-cli exposed
 		```
 
-	* View the status,
+* View the status,
 
 ```console
 $ oc status
@@ -259,22 +257,22 @@ http://example-health-cli-example-health-cli.roks-rt-007632d2d5235aabd90e420d6fa
 2 infos identified, use 'oc status --suggest' to see details.
 ```
 
-7.  Review the `Example-Health` app in the web console,
+4.  Review the `Example-Health` app in the web console,
 
-	* Go to `My Projects` via URI `/console/projects`,
+* Go to `My Projects` via URI `/console/projects`,
 
-		![My Projects](https://dsc.cloud/quickshare/Shared-Image-2019-09-25-15-38-01.png)
+![My Projects](https://dsc.cloud/quickshare/Shared-Image-2019-09-25-15-38-01.png)
 
-	* Select the project `example-health-ns`, unfold the `DEPLOYMENT CONFIG` for `example-health-cli` application details,
+* Select the project `example-health-ns`, unfold the `DEPLOYMENT CONFIG` for `example-health-cli` application details,
 
-		![Example Health details](https://dsc.cloud/quickshare/Shared-Image-2019-09-25-15-39-07.png)
+	![Example Health details](https://dsc.cloud/quickshare/Shared-Image-2019-09-25-15-39-07.png)
 
-	* In the `NETWORKING` section, click the `Routes - External Traffic` link, e.g. http://example-health-example-health-ns.roks-rt-007632d2d5235aabd90e420d6faed9fd-0001.us-south.containers.appdomain.cloud/login.html
+* In the `NETWORKING` section, click the `Routes - External Traffic` link, e.g. http://example-health-example-health-ns.roks-rt-007632d2d5235aabd90e420d6faed9fd-0001.us-south.containers.appdomain.cloud/login.html
 
-	* This opens the Example Health app in a new tab of your browser,
-	* Login with `test:test`,
+* This opens the Example Health app in a new tab of your browser,
+* Login with `test:test`
 
-		![Example Health details](https://dsc.cloud/quickshare/Shared-Image-2019-09-25-15-40-10.png)
+	![Example Health details](https://dsc.cloud/quickshare/Shared-Image-2019-09-25-15-40-10.png)
 
 ### Add Health Checks 
 Just like in our main lab, we'll add some Health checks to our application using the `probe` command. A probe is a Kubernetes action that periodically performs diagnostics on a running container. 
