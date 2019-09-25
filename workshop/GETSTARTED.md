@@ -8,27 +8,29 @@ In this section, you will login to your own IBM Cloud account, and then get acce
 
 3. [Click here to go to the Grant Cluster](grant_cluster) web page and enter your IBM ID (the email you used to sign up), the lab key from the instructor, and select the `US South (us-south)` region.
 
-    ![Get Clusters App](.gitbook/assets/get-clusters.png)
+    ![Get Clusters App](https://dsc.cloud/quickshare/Shared-Image-2019-09-16-09-53-30.png)
 
-4. You will be added to the IBM Lab account and granted access to a cluster. Note the name of your cluster. It will be something like: `myclusterXXX`.
+4. You will be added to the IBM Lab account and granted access to a cluster. Note the name of your cluster. It will be something like: `roksd10-xx` or `roksd12-xx`.
 
 5. Refresh your [IBM Cloud Dashboard](https://cloud.ibm.com)
 
-6. Switch to the **183569-IBM** account by clicking on the account selection drop down in the top nav bar.
+6. Switch to the **78003-IBM** account by clicking on the account selection drop down in the top nav bar.
 
-   ![IBM Account](.gitbook/assets/ibmaccount.png)
+   ![IBM Account](https://dsc.cloud/quickshare/Shared-Image-2019-09-16-13-48-57.png)
 
 7. Click on **Kubernetes Clusters** in the Resource Summary tile.
 
-    ![IBM Dashboard](.gitbook/assets/dashboard.png)
+    ![IBM Dashboard](https://dsc.cloud/quickshare/show-cluster-on-account.png)
 
 8. Under **Kubernetes Clusters**, click on the cluster that has been assigned to you.
 
 9. Launch the **OpenShift web console** and have a look around! You can come back to this dashboard throughout your lab.
 
-## [Continue to Exercise 0](exercise-0/README.md)
+    ![Launch OpenShift Console](https://dsc.cloud/quickshare/launch-openshift-ui.png)
+
+## [Continue to Exercise 1](exercise-1/README.md)
 
 <!-- put the vcpi URL here -->
 [vcpi_code]: https://cloud.ibm.com
 <!-- put the grant cluster URL here -->
-[grant_cluster]: http://grant-cluster-iks.mybluemix.net
+[grant_cluster]: https://roks-lab.mybluemix.net/
