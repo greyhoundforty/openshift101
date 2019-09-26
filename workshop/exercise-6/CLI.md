@@ -1,4 +1,4 @@
-# To the terminal!
+## To the terminal!
 
 ## Deploying an application via the `oc` CLI
 In this section we'll show how to interact with your OpenShift cluster via the CLI. We'll be running through the same general steps as the main lab, just via the command line. 
@@ -308,4 +308,3 @@ You can create a horizontal pod autoscaler with the oc autoscale command and spe
 $ oc autoscale dc/example-health-cli --min=1 --max=5 --cpu-percent=20
 horizontalpodautoscaler.autoscaling/example-health-cli autoscaled
 ```
-

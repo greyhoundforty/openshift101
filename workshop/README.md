@@ -8,7 +8,6 @@ Red Hat OpenShift represents a common platform, based on the industry-standard K
 
 In this lab we'll cover using the OpenShift platform on the IBM Cloud and the common developer loop around cloud native applications including:
 
-* Kubernetes Basics
 * OpenShift Basics
 * Deploying an application
     * Source-to-Image \(s2i\)
@@ -21,5 +20,8 @@ In this lab we'll cover using the OpenShift platform on the IBM Cloud and the co
     * Resource Limits
 * Health Checks
     * Readiness and Liveness Probes
+* Taking it further (supplemental material)
+    * Adding Git Webhook integration
+    * Deploying our app via the `oc` CLI
 
 ## [Get Started](GETSTARTED.md)
