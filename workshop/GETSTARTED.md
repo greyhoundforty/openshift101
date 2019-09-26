@@ -6,7 +6,7 @@ In this section, you will login to your own IBM Cloud account, and then get acce
 
 2. If you do not have an account, you could create your own [IBM Cloud account][vcpi_code].
 
-3. [Click here to go to the Grant Cluster](grant_cluster) web page and enter your IBM ID (the email you used to sign up), the lab key from the instructor, and select the `US South (us-south)` region.
+3. [Click here to go to the Grant Cluster][grant_cluster] web page and enter your IBM ID (the email you used to sign up), the lab key from the instructor, and select the `US South (us-south)` region.
 
     ![Get Clusters App](https://dsc.cloud/quickshare/Shared-Image-2019-09-16-09-53-30.png)
 
@@ -33,4 +33,4 @@ In this section, you will login to your own IBM Cloud account, and then get acce
 <!-- put the vcpi URL here -->
 [vcpi_code]: https://cloud.ibm.com
 <!-- put the grant cluster URL here -->
-[grant_cluster]: https://roks-lab.mybluemix.net/
+[grant_cluster]: https://roks-lab.mybluemix.net
