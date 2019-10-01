@@ -10,4 +10,5 @@
     * Taking it further
         * [Adding Git Webhooks](exercise-6/GIT.md)
         * [Deploy app via the CLI](exercise-6/CLI.md)
+    * [Wrap Up](WRAP_UP.md)
 * [Certification](https://cognitiveclass.ai/courses/beyond-the-basics-istio-and-ibm-cloud-kubernetes-service/)

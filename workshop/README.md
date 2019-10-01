@@ -7,7 +7,7 @@ A recent [study](https://github.com/svennam92/openshift101/tree/ab7f1406831de9aa
 Red Hat OpenShift represents a common platform, based on the industry-standard Kubernetes, that allows you to build on premises, on the IBM Cloud, or on any other leading cloud platform. You want freedom of choice; Red Hat OpenShift offers exactly that.
 
 In this lab we'll cover using the OpenShift platform on the IBM Cloud and the common developer loop around cloud native applications including:
-
+        
 * OpenShift Basics
 * Deploying an application
     * Source-to-Image \(s2i\)
