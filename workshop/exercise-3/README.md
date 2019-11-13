@@ -39,4 +39,4 @@ Navigating back to the cluster console, you can also launch:
 
 ![Alert Manager](../.gitbook/assets/screen-shot-2019-08-13-at-11.22.23-pm.png)
 
-## [Continue to Exercise 4](exercise-4/README.md)
+## [Continue to Exercise 4](../exercise-4/README.md)
