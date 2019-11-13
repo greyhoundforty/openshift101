@@ -48,4 +48,4 @@ Congrats! You've deployed a `Node.js` app to Kubernetes using OpenShift Source-t
 
 [S2I](https://docs.openshift.com/container-platform/3.11/architecture/core_concepts/builds_and_image_streams.html#source-build) is a framework that creates container images from source code, then runs the assembled images as a containers. It allows developers to build reproducible images easily, letting them spend time on what matters most, developing their code!
 
-## [Continue to Exercise 2](exercise-2/README.md)
+## [Continue to Exercise 2](../exercise-2/README.md)
