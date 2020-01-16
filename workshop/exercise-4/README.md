@@ -1,4 +1,4 @@
-# Exercise 4: Autoscale Pods
+# Exercise 4: Scaling the application
 
 In this exercise, we'll leverage the metrics we've observed in the previous step to automatically scale our UI application in response to load.
 
@@ -6,7 +6,7 @@ In this exercise, we'll leverage the metrics we've observed in the previous step
 
 Before we can setup autoscaling for our pods, we first need to set resource limits on the pods running in our cluster. Limits allows you to choose the minimum and maximum CPU and memory usage for a pod.
 
-Navigate to `Applications > Deployments`, then choose your deployment. Then, choose `Actions > Edit Resource Limits`.
+Switch back to the `Application Console` view and select your project. Navigate to `Applications > Deployments`, then choose your deployment. Then, choose `Actions > Edit Resource Limits`.
 
 ![Add Resource Limits](../.gitbook/assets/screen-shot-2019-08-13-at-9.54.54-pm.png)
 
