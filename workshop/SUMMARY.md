@@ -2,7 +2,7 @@
 
 ### Getting Started
 
-* [Create account and get cluster](pre-work/GET_STARTED.md)
+* [Create account and get cluster](pre-work/GETSTARTED.md)
 * [Setup CLI Access for the cluster](pre-work/SETUP_CLI.md)
 
 ### Workshop
