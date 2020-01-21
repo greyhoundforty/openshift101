@@ -13,6 +13,7 @@
 * [Exercise 4: Scaling the application](exercise-4/README.md)
 * [Exercise 5: Health checks](exercise-5/README.md)
 * [Exercise 6: Deploying the app using the CLI](exercise-6/README.md)
+* [Exercise 7: Optional webhook integration](exercise-7/README.md)
 
 ### Resources
 
