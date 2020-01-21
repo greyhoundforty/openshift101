@@ -20,13 +20,13 @@ In this section, you will login to your own IBM Cloud account, and then get acce
 
 7. Click on **Clusters** in the Resource Summary tile.
 
-    ![IBM Dashboard](https://dsc.cloud/quickshare/show-cluster-on-account.png)
+    ![IBM Dashboard](https://dsc.cloud/quickshare/Shared-Image-2020-01-20-14-56-27.png)
 
 8. Under **Clusters**, click on the cluster that has been assigned to you.
 
 9. Launch the **OpenShift web console** and have a look around! You can come back to this dashboard throughout your lab.
 
-    ![Launch OpenShift Console](https://dsc.cloud/quickshare/launch-openshift-ui.png)
+    ![Launch OpenShift Console](https://dsc.cloud/quickshare/Shared-Image-2020-01-21-09-38-35.png)
 
 ## [Continue to Exercise 1](exercise-1/README.md)
 
