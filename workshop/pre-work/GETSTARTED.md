@@ -6,7 +6,7 @@ In this section, you will login to your own IBM Cloud account, and then get acce
 
 2. If you do not have an account, you could create your own [IBM Cloud account][vcpi_code].
 
-3. [Click here to go to the Grant Cluster][grant_cluster] web page and enter your IBM ID (the email you used to sign up) and the lab key provided by the instructor.
+3. [Click here to go to the Grant Cluster](https://rokslab.mybluemix.net) web page and enter your IBM ID (the email you used to sign up) and the lab key provided by the instructor.
 
     ![Get Clusters App](https://dsc.cloud/quickshare/Shared-Image-2019-09-16-09-53-30.png)
 
@@ -18,11 +18,11 @@ In this section, you will login to your own IBM Cloud account, and then get acce
 
    ![IBM Account](https://dsc.cloud/quickshare/Shared-Image-2019-09-16-13-48-57.png)
 
-7. Click on **Kubernetes Clusters** in the Resource Summary tile.
+7. Click on **Clusters** in the Resource Summary tile.
 
     ![IBM Dashboard](https://dsc.cloud/quickshare/show-cluster-on-account.png)
 
-8. Under **Kubernetes Clusters**, click on the cluster that has been assigned to you.
+8. Under **Clusters**, click on the cluster that has been assigned to you.
 
 9. Launch the **OpenShift web console** and have a look around! You can come back to this dashboard throughout your lab.
 
@@ -32,5 +32,3 @@ In this section, you will login to your own IBM Cloud account, and then get acce
 
 <!-- put the vcpi URL here -->
 [vcpi_code]: https://cloud.ibm.com
-<!-- put the grant cluster URL here -->
-[grant_cluster]: #

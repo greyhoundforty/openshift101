@@ -1,6 +1,6 @@
 # Setup CLI Access for the cluster
 
-This section documents how to set up CLI access to a cluster. If you do not already have access to a cluster, refer back to the **[Getting Started](GET_STARTED.md)** section.
+This section documents how to set up CLI access to a cluster. If you do not already have access to a cluster, refer back to the **[Getting Started](GETSTARTED.md)** section.
 
 ## Install OpenShift CLI tools
 
