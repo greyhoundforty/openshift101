@@ -20,3 +20,5 @@
 * [Certification on CognitiveClass.ai](https://cognitiveclass.ai/courses/beyond-the-basics-istio-and-ibm-cloud-kubernetes-service/)
 * [IBM Developer](https://developer.ibm.com)
 * [Docs: Red Hat OpenShift on IBM Cloud](https://cloud.ibm.com/docs/openshift)
+* [OpenShift Interactive Learning Portal](https://learn.openshift.com/)
+* [OpenShift and IKS Public Slack](https://ibm-container-service.slack.com/)
